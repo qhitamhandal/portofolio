@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Script untuk auto add, commit, dan push ke GitHub repo
+# Pastikan Anda sudah mengkonfigurasi git dengan username dan email yang benar
+# serta memiliki akses ke repository (SSH atau token akses)
+
+# Warna untuk output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Fungsi untuk menampilkan pesan error
+error_msg() {
+    echo -e "${RED}Error: $1${NC}" >&2
+    exit 1
+}
+
+# Fungsi untuk menampilkan pesan sukses
+success_msg() {
+    echo -e "${GREEN}$1${NC}"
+}
+
+# Fungsi untuk menampilkan pesan informasi
+info_msg() {
+    echo -e "${YELLOW}$1${NC}"
+}
+
+# Cek apakah direktori saat ini adalah repository git
+if [ ! -d .git ]; then
+    error_msg "Direktori ini bukan repository git. Silakan jalankan script ini di dalam repository git."
+fi
+
+# Cek apakah ada perubahan yang belum di-stage
+if [ -z "$(git status --porcelain)" ]; then
+    info_msg "Tidak ada perubahan yang perlu di-commit."
+    exit 0
+fi
+
+# Tampilkan status repository
+info_msg "Status repository saat ini:"
+git status
+
+# Tambahkan semua perubahan ke staging area
+info_msg "\nMenambahkan semua perubahan ke staging area..."
+git add . || error_msg "Gagal menambahkan perubahan."
+
+# Input pesan commit
+echo -e "\nMasukkan pesan commit (tekan Enter untuk menggunakan pesan default):"
+read -r commit_message
+
+# Jika tidak ada input, gunakan pesan default
+if [ -z "$commit_message" ]; then
+    commit_message="Auto commit pada $(date '+%Y-%m-%d %H:%M:%S')"
+fi
+
+# Lakukan commit
+info_msg "\nMelakukan commit dengan pesan: $commit_message"
+git commit -m "$commit_message" || error_msg "Gagal melakukan commit."
+
+# Push ke branch saat ini
+current_branch=$(git branch --show-current)
+info_msg "\nMelakukan push ke branch $current_branch..."
+git push origin "$current_branch" && success_msg "\nBerhasil push ke GitHub!" || error_msg "Gagal push ke GitHub."
