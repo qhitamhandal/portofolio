@@ -411,6 +411,7 @@
     </section>
 
     <!-- Contact Section -->
+    <!-- Contact Section -->
     <section id="contact" class="py-20 px-4">
       <div class="container mx-auto max-w-4xl">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
@@ -418,14 +419,23 @@
         </h2>
 
         <div class="frosted-glass rounded-2xl p-8 md:p-12">
-          <form class="space-y-6">
+          <!-- Updated form with FormSubmit integration -->
+          <form
+            action="https://formsubmit.co/contact@elfx.my.id"
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- Add these hidden inputs for FormSubmit configuration -->
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label for="name" class="block mb-2">Your Name</label>
                 <input
                   type="text"
                   id="name"
-                  class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                  name="name"
+                  required
+                  class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300 text-black"
                 />
               </div>
               <div>
@@ -433,7 +443,9 @@
                 <input
                   type="email"
                   id="email"
-                  class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                  name="email"
+                  required
+                  class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300 text-black"
                 />
               </div>
             </div>
@@ -442,15 +454,19 @@
               <input
                 type="text"
                 id="subject"
-                class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                name="subject"
+                required
+                class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300 text-black"
               />
             </div>
             <div>
               <label for="message" class="block mb-2">Message</label>
               <textarea
                 id="message"
+                name="message"
                 rows="5"
-                class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                required
+                class="w-full bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-300 text-black"
               ></textarea>
             </div>
             <button
@@ -461,6 +477,7 @@
             </button>
           </form>
 
+          <!-- Rest of your contact section remains the same -->
           <div class="mt-12 pt-8 border-t border-white border-opacity-20">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div class="flex items-center">
@@ -507,10 +524,12 @@
       <div class="container mx-auto px-4 text-center">
         <p class="mb-4">© 2025 Razael Saputra. All rights reserved.</p>
         <div class="flex justify-center space-x-6">
-          <a href="#" class="hover:text-purple-200 transition"
+          <a
+            href="./pages/privacypolicy.html"
+            class="hover:text-purple-200 transition"
             >Privacy Policy</a
           >
-          <a href="#" class="hover:text-purple-200 transition"
+          <a href="./pages/tos.html" class="hover:text-purple-200 transition"
             >Terms of Service</a
           >
           <a href="#" class="hover:text-purple-200 transition">Sitemap</a>
